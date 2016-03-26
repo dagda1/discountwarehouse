@@ -1,5 +1,5 @@
 import angular from 'angular';
-import ProductService from './productservice';
+import ProductsService from './products-service';
 
 export default angular.module('app.services', [
-]).service('productService', ProductService);
+]).service('productsService', ProductsService);

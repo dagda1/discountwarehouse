@@ -3,18 +3,34 @@ import template from './home.html';
 import uiRouter from 'angular-ui-router';
 
 const controller = class HomeController {
-  constructor(productService) {
-    this.productService = productService;
+  constructor($ngRedux, $scope, productsActions) {
+    const unsubscribe = $ngRedux.connect(this.mapStateToThis, productsActions)(this);
+
+    $scope.$on('$destroy', unsubscribe);
+  }
+
+  mapStateToThis(state) {
+    const {
+      isFetching,
+      products
+    } = state;
+
+    return {
+      isFetching,
+      products
+    };
   }
 
   $onInit() {
-
+    this.fetchProductsIfNeeded();
   }
 };
 
 const homeComponent = {
   template,
-  controller
+  controller,
+  controllerAs: 'vm',
+  bindToController: true
 };
 
 const homeModule = angular.module('home', [

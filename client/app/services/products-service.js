@@ -1,4 +1,4 @@
-class ProductService {
+class ProductsService {
   constructor($http) {
     this.$http = $http;
   }
@@ -8,4 +8,4 @@ class ProductService {
   }
 };
 
-export default ProductService;
+export default ProductsService;

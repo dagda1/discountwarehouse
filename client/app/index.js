@@ -8,6 +8,7 @@ import AppComponent from './components/app/app';
 import Components from './components/components';
 import Services from './services/services';
 import reducers from './reducers';
+import productsActions from './actions/products-actions.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'angular-ui-bootstrap';
@@ -25,4 +26,5 @@ angular.module('app', [
 })
 .controller('mainCtrl', function() {
 })
-.directive('app', AppComponent);
+.directive('app', AppComponent)
+.service('productsActions', productsActions);
