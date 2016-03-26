@@ -29,8 +29,7 @@ const controller = class HomeController {
 const homeComponent = {
   template,
   controller,
-  controllerAs: 'vm',
-  bindToController: true
+  controllerAs: 'vm'
 };
 
 const homeModule = angular.module('home', [
