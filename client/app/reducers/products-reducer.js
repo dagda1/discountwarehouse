@@ -1,7 +1,7 @@
 import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS } from "../constants";
 
 const initialState = {
-  products: '[]',
+  products: [],
   isFetching: false,
   limit: 30,
   skip: 0,

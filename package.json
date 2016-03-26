@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-api": "node api/src/server.js",
-    "dev": "webpack-dev-server --env dev --history-api-fallback --inline --progress --port 5000",
+    "dev": "webpack-dev-server --env dev --history-api-fallback --inline --progress --port 9090",
     "start": "npm run dev"
   },
   "author": "",

@@ -52,11 +52,8 @@ module.exports = {
     inline: true,
     progress: true,
     proxy: [{
-      path: '/auth/*',
-      target: 'http://localhost:5000'
-    },{
       path: '/api/*',
-      target: 'http://localhost:5000'
+      target: 'http://localhost:8000'
     }]
   }
 };

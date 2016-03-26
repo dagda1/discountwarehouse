@@ -16,12 +16,12 @@ function receiveProducts(products) {
   };
 }
 
-export default function productsService(productsService) {
+export default function productsActions(productsService) {
   function fetchProducts() {
     return dispatch => {
       dispatch(requestProducts());
       return productsService.getProducts()
-        .then(products => products)
+        .then(result => result.data)
         .then(products => dispatch(receiveProducts(products)));
     };
   }

@@ -13,7 +13,7 @@ const controller = class HomeController {
     const {
       isFetching,
       products
-    } = state;
+    } = state.products;
 
     return {
       isFetching,
