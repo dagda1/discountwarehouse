@@ -12,7 +12,9 @@ const controller = class HomeController {
   mapStateToThis(state) {
     const {
       isFetching,
-      products
+      products,
+      page,
+      pageSize
     } = state.products;
 
     return {

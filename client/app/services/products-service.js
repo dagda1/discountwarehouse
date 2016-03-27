@@ -7,8 +7,14 @@ class ProductsService {
     return this.$http.get('/api/products',
                      {
                        transformResponse: (data) => {
-                         var products =  data.split('\n').map((row) => {
-                           return row.length ? JSON.parse(row) : null;
+                         const products =  data.split('\n').map((row) => {
+                           const product = row.length ? JSON.parse(row) : null;
+
+                           if(!(product)) {
+                             return null;
+                           }
+
+                           return  Object.assign({}, product, {date: moment(new Date(product.date))});
                          }).filter(product => !!product);
 
                          return products;

@@ -21,10 +21,9 @@ angular.module('app', [
   ngRedux,
   ngReduxRouter
 ])
-.config(($ngReduxProvider) => {
+.config(['$ngReduxProvider', '$locationProvider', ($ngReduxProvider, $locationProvder) => {
   $ngReduxProvider.createStoreWith(reducers, [thunk, createLogger(), 'ngUiRouterMiddleware']);
-})
-.controller('mainCtrl', function() {
-})
+  $locationProvder.html5Mode(true);
+}])
 .directive('app', AppComponent)
 .service('productsActions', productsActions);

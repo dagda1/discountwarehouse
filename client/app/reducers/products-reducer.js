@@ -3,8 +3,8 @@ import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS } from "../constants";
 const initialState = {
   products: [],
   isFetching: false,
-  limit: 30,
-  skip: 0,
+  page: 0,
+  pageSize: 20,
   sort: 'id'
 };
 
