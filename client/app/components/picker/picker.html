@@ -1,0 +1,10 @@
+<span uib-dropdown on-toggle="toggled(open)">
+  <a href id="simple-dropdown" uib-dropdown-toggle>
+    {{vm.label}}
+  </a>
+  <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+    <li ng-repeat="option in vm.options">
+      <a href>{{option}}</a>
+    </li>
+  </ul>
+</span>

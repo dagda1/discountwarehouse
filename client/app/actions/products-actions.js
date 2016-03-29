@@ -3,13 +3,14 @@ import {
   RECEIVE_PRODUCTS
 } from '../constants';
 
-function requestProducts(reddit) {
+function requestProducts(sort) {
   return {
-    type: REQUEST_PRODUCTS
+    type: REQUEST_PRODUCTS,
+    sort
   };
 }
 
-function receiveProducts(products) {
+function receiveProducts(sort, products) {
   return {
     type: RECEIVE_PRODUCTS,
     products: products
@@ -17,19 +18,19 @@ function receiveProducts(products) {
 }
 
 export default function productsActions(productsService) {
-  function fetchProducts() {
+  function fetchProducts(sort) {
     return dispatch => {
-      dispatch(requestProducts());
-      return productsService.getProducts()
+      dispatch(requestProducts(sort));
+      return productsService.getProducts({sort})
         .then(result => result.data)
-        .then(products => dispatch(receiveProducts(products)));
+        .then(products => dispatch(receiveProducts(sort, products)));
     };
   }
 
-  function fetchProductsIfNeeded() {
+  function fetchNewSortQueryIfNeeded(sort) {
     return (dispatch, getState) => {
       if(shouldFetchProducts(getState())) {
-        return dispatch(fetchProducts());
+        return dispatch(fetchProducts(sort));
       }
     };
   }
@@ -49,6 +50,6 @@ export default function productsActions(productsService) {
   }
 
   return {
-    fetchProductsIfNeeded
+    fetchNewSortQueryIfNeeded
   };
 };

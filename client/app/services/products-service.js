@@ -4,7 +4,9 @@ class ProductsService {
   }
 
   getProducts(options ={}) {
-    return this.$http.get('/api/products',
+    const url = this.getUrlFromOptions(options);
+
+    return this.$http.get(url,
                      {
                        transformResponse: (data) => {
                          const products =  data.split('\n').map((row) => {
@@ -20,6 +22,10 @@ class ProductsService {
                          return products;
                        }
                      });
+  }
+
+  getUrlFromOptions(options) {
+    return `/api/products?sort=${options.sort}`;
   }
 };
 

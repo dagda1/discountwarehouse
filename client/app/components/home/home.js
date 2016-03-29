@@ -4,6 +4,8 @@ import uiRouter from 'angular-ui-router';
 
 const controller = class HomeController {
   constructor($ngRedux, $scope, productsActions) {
+    const options = ['id', 'price', 'size'];
+
     const unsubscribe = $ngRedux.connect(this.mapStateToThis, productsActions)(this);
 
     $scope.$on('$destroy', unsubscribe);
@@ -13,18 +15,22 @@ const controller = class HomeController {
     const {
       isFetching,
       products,
+      sort,
       page,
       pageSize
     } = state.products;
 
     return {
       isFetching,
+      sort,
+      page,
+      pageSize,
       products
     };
   }
 
   $onInit() {
-    this.fetchProductsIfNeeded();
+    this.fetchNewSortQueryIfNeeded(this.sort);
   }
 };
 
