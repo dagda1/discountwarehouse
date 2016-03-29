@@ -10,6 +10,7 @@ let componentModule = angular.module('app.components', [
   Home.name,
   ProductsList.name,
   Product.name,
+  Picker.name
 ]);
 
 export default componentModule;
