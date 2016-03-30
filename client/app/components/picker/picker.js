@@ -3,6 +3,9 @@ import template from './picker.html';
 import uiBootstrap from "angular-ui-bootstrap";
 
 const controller = class PickerController {
+  toggled() {
+    console.log('toggled');
+  }
 };
 
 const pickerComponent = {

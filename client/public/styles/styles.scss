@@ -44,3 +44,23 @@ body {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
 }
+
+$menu-padding: 100px;
+
+.sort-menu {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  z-index: 10;
+  top: 61px;
+
+  button {
+    padding-left: $menu-padding;
+    padding-right: $menu-padding;
+  }
+
+  .dropdown-menu {
+    text-align: center;
+    width: 100%;
+  }
+}
