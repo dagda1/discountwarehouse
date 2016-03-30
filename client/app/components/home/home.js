@@ -9,6 +9,8 @@ const controller = class HomeController {
     const unsubscribe = $ngRedux.connect(this.mapStateToThis, productsActions)(this);
 
     $scope.$on('$destroy', unsubscribe);
+
+    this.options = ['id', 'price', 'size'];
   }
 
   mapStateToThis(state) {
@@ -18,7 +20,7 @@ const controller = class HomeController {
       sort,
       page,
       pageSize
-    } = state.products;
+    } = state.page;
 
     return {
       isFetching,
@@ -30,7 +32,7 @@ const controller = class HomeController {
   }
 
   $onInit() {
-    this.fetchNewSortQueryIfNeeded(this.sort);
+    this.fetchNewPageIfNeeded();
   }
 };
 

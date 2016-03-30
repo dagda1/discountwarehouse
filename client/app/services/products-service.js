@@ -3,7 +3,7 @@ class ProductsService {
     this.$http = $http;
   }
 
-  getProducts(options ={}) {
+  getProducts(options) {
     const url = this.getUrlFromOptions(options);
 
     return this.$http.get(url,
@@ -25,7 +25,10 @@ class ProductsService {
   }
 
   getUrlFromOptions(options) {
-    return `/api/products?sort=${options.sort}`;
+    const limit = options.page * options.pageSize;
+    const url = `/api/products?limit=${limit}&skip=${options.pageSize}&sort=${options.sort}`;
+
+    return url;
   }
 };
 

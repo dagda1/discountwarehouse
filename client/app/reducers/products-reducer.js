@@ -8,7 +8,7 @@ const initialState = {
   sort: 'id'
 };
 
-export default function products(state = initialState, action = {}) {
+export default function page(state = initialState, action = {}) {
   switch(action.type) {
   case REQUEST_PRODUCTS:
     return Object.assign({}, state, {
