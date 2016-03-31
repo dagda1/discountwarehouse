@@ -3,8 +3,8 @@ import template from './picker.html';
 import uiBootstrap from "angular-ui-bootstrap";
 
 const controller = class PickerController {
-  toggled() {
-    console.log('toggled');
+  selectionChanged(choice) {
+    this.onSelectionChanged({choice: choice});
   }
 };
 
@@ -14,7 +14,8 @@ const pickerComponent = {
   controllerAs: 'vm',
   bindings: {
     label: '@',
-    options: '<'
+    options: '<',
+    onSelectionChanged: '&'
   }
 };
 

@@ -1,4 +1,8 @@
-import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS } from "../constants";
+import {
+  REQUEST_PRODUCTS,
+  RECEIVE_PRODUCTS,
+  CHANGE_SORT
+} from '../constants';
 
 const initialState = {
   products: [],
@@ -20,6 +24,14 @@ export default function page(state = initialState, action = {}) {
       isFetching: false,
       products: action.products
     });
+
+  case CHANGE_SORT: {
+    return Object.assign({}, state, {
+      sort: action.sort,
+      page: 1,
+      products: []
+    });
+  }
 
   default:
     return state;

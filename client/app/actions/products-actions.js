@@ -1,6 +1,7 @@
 import {
   REQUEST_PRODUCTS,
-  RECEIVE_PRODUCTS
+  RECEIVE_PRODUCTS,
+  CHANGE_SORT
 } from '../constants';
 
 function requestProducts() {
@@ -13,6 +14,13 @@ function receiveProducts(products) {
   return {
     type: RECEIVE_PRODUCTS,
     products: products
+  };
+}
+
+function changeSort(choice) {
+  return {
+    type: CHANGE_SORT,
+    sort: choice
   };
 }
 
@@ -49,7 +57,18 @@ export default function productsActions(productsService) {
     return products.didInvalidate;
   }
 
+  function sortChanged(choice) {
+    return (dispatch, getState) => {
+      if(choice === getState().page.sort) {
+        return;
+      }
+      dispatch(changeSort(choice));
+      dispatch(fetchNewPageIfNeeded());
+    };
+  }
+
   return {
-    fetchNewPageIfNeeded
+    fetchNewPageIfNeeded,
+    sortChanged
   };
 };

@@ -1,11 +1,11 @@
 <div class="sort-menu">
-  <div class="btn-group" uib-dropdown>
-    <button  type="button" class="btn btn-primary" uib-dropdown-toggle>
+  <div uib-dropdown class="btn-group">
+    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
       {{vm.label}} <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
       <li ng-repeat="option in vm.options" role="menuitem">
-        <a href="#">{{option}}</a>
+        <a href="#" ng-click="vm.selectionChanged(option)">{{option}}</a>
       </li>
     </ul>
   </div>

@@ -5,7 +5,7 @@ import ProductsList from './products/products-list.js';
 import Product from './product/product.js';
 import Picker from './picker/picker.js';
 
-let componentModule = angular.module('app.components', [
+const componentModule = angular.module('app.components', [
   Navbar.name,
   Home.name,
   ProductsList.name,

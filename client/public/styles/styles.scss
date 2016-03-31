@@ -24,12 +24,6 @@ body {
   }
 }
 
-.fetch{
-   button {
-    width: 100%;
-  }
-}
-
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;
@@ -62,5 +56,11 @@ $menu-padding: 100px;
   .dropdown-menu {
     text-align: center;
     width: 100%;
+  }
+}
+
+.fetch{
+   button {
+     width: 100%;
   }
 }
