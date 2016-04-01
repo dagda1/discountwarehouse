@@ -26,7 +26,7 @@ class ProductsService {
 
   getUrlFromOptions(options) {
     const limit = options.page * options.pageSize;
-    const url = `/api/products?limit=${limit}&skip=${options.pageSize}&sort=${options.sort}`;
+    const url = `/api/products?limit=${options.pageSize}&skip=${limit}&sort=${options.sort}`;
 
     return url;
   }
