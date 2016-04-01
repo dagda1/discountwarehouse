@@ -6,9 +6,7 @@ const controller = class HomeController {
   constructor($ngRedux, $scope, productsActions) {
     const options = ['id', 'price', 'size'];
 
-    const unsubscribe = $ngRedux.connect(this.mapStateToThis, productsActions)(this);
-
-    $scope.$on('$destroy', unsubscribe);
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, productsActions)(this);
 
     this.options = ['id', 'price', 'size'];
   }
@@ -33,6 +31,10 @@ const controller = class HomeController {
 
   $onInit() {
     this.fetchNewPageIfNeeded();
+  }
+
+  $onDestroy() {
+    this.unsubscribe();
   }
 };
 

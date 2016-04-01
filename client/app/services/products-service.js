@@ -16,7 +16,11 @@ class ProductsService {
                              return null;
                            }
 
-                           return  Object.assign({}, product, {date: moment(new Date(product.date))});
+                           return  Object.assign({}, product, {
+                             price: (product.price / 100),
+                             date: moment(new Date(product.date))
+                           });
+
                          }).filter(product => !!product);
 
                          return products;

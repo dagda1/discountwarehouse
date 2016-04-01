@@ -1,4 +1,5 @@
 import angular from 'angular';
+import template from './infinite-scroll.html';
 import { throttle } from 'lodash';
 
 import { windowScrollTop, elementTop } from '../../utils/dom';
@@ -12,8 +13,8 @@ const controller = class InfiniteController {
     this.attachScrollListener();
   }
 
-  $onChanges() {
-    if(!this.isFetching) {
+  $onChanges(changes) {
+    if(changes.isFetching.currentValue) {
       return;
     }
 
@@ -30,7 +31,7 @@ const controller = class InfiniteController {
     const elTotalHeight = elementTop(el);
     const currentBottomPosition = elTotalHeight - scrollTop - window.innerHeight;
 
-    if(currentBottomPosition < 0) {
+    if(currentBottomPosition < 300) {
       this.loadMore();
       this.detachScrollListener();
     }
@@ -51,6 +52,7 @@ const controller = class InfiniteController {
 
 const infiniteScrollComponent = {
   controller,
+  template,
   controllerAs: 'vm',
   bindings: {
     isFetching: '<',
