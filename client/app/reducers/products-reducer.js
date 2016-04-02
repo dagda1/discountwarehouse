@@ -39,7 +39,8 @@ export default function page(state = INITIAL_STATE, action = {}) {
     return Object.assign({}, state, {
       sort: action.sort,
       page: 0,
-      products: []
+      products: [],
+      buffer: []
     });
   }
 
@@ -55,12 +56,14 @@ export default function page(state = INITIAL_STATE, action = {}) {
 
   case TAKE_FROM_BUFFER: {
     let buffer = state.buffer.slice(0);
-    let products = buffer.splice(0, state.pageSize);
+    let products = state.products.slice(0);
 
-    return {
+    products.push(...buffer.splice(0, state.pageSize));
+
+    return Object.assign({}, state, {
       buffer,
       products
-    };
+    });
   }
 
   default:

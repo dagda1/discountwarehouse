@@ -6,7 +6,7 @@ import { windowScrollTop, elementTop } from '../../utils/dom';
 
 const controller = class InfiniteController {
   constructor() {
-    this.scroller = throttle(this.scroll, 1000).bind(this);
+    this.scroller = throttle(this.scroll, 500).bind(this);
   }
 
   $onInit() {
@@ -31,7 +31,7 @@ const controller = class InfiniteController {
     const elTotalHeight = elementTop(el);
     const currentBottomPosition = elTotalHeight - scrollTop - window.innerHeight;
 
-    if(currentBottomPosition < 300) {
+    if(currentBottomPosition < 100) {
       this.loadMore();
       this.detachScrollListener();
     }

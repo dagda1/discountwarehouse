@@ -54,6 +54,8 @@ describe('ProductsReducer', () => {
     const nextState = productsReducer(initialSate, action);
 
     expect(nextState.sort).toEqual('foo');
+    expect(nextState.products.length).toBeFalsy();
+    expect(nextState.buffer.length).toBeFalsy();
   });
 
   it('should add to and take from products buffer', () => {

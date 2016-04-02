@@ -15,7 +15,7 @@ function requestProducts() {
 function receiveProducts(products) {
   return {
     type: RECEIVE_PRODUCTS,
-    products: products
+    products
   };
 }
 
@@ -26,37 +26,56 @@ function changeSort(choice) {
   };
 }
 
+function addToBuffer(products) {
+  return {
+    type: ADD_TO_BUFFER,
+    products
+  };
+};
+
+function takeFromBuffer() {
+  return {
+    type: TAKE_FROM_BUFFER
+  };
+};
+
 export default function productsActions(productsService) {
-  function fetchProducts(state) {
-    return dispatch => {
+  function fetchProducts(state, nextAction) {
+    return (dispatch, getState) => {
       dispatch(requestProducts());
       return productsService.getProducts(state)
         .then(result => result.data)
-        .then(products => dispatch(receiveProducts(products)));
+        .then(products => dispatch(nextAction(products)));
     };
   }
 
   function fetchNewPageIfNeeded() {
     return (dispatch, getState) => {
       const page = getState().page;
-      if(shouldFetchProducts(page)) {
-        return dispatch(fetchProducts(page));
+
+      if(page.buffer.length) {
+        dispatch(fetchProducts(page, addToBuffer));
+        return dispatch(takeFromBuffer());
       }
+
+      if(!shouldFetchProducts(page)) {
+        return null;
+      }
+
+      const result = dispatch(fetchProducts(page, receiveProducts));
+
+      dispatch(fetchProducts(getState().page, addToBuffer));
+
+      return result;
     };
   }
 
   function shouldFetchProducts(state) {
-    const products = state.page;
-
-    if (!products.length) {
+    if (!state.products.length) {
       return true;
     }
 
-    if (products.isFetching) {
-      return false;
-    }
-
-    return products.didInvalidate;
+    return !state.isFetching;
   }
 
   function sortChanged(choice) {
