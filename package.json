@@ -6,7 +6,9 @@
   "scripts": {
     "start-api": "node api/src/server.js",
     "dev": "webpack-dev-server --env dev --history-api-fallback --inline --progress --port 9090",
-    "start": "npm run dev"
+    "start-api": "node index.js",
+    "start": "npm run start-api & npm run dev",
+    "test": "karma start"
   },
   "author": "",
   "license": "",
