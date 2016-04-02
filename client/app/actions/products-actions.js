@@ -1,7 +1,9 @@
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
-  CHANGE_SORT
+  CHANGE_SORT,
+  ADD_TO_BUFFER,
+  TAKE_FROM_BUFFER
 } from '../constants';
 
 function requestProducts() {

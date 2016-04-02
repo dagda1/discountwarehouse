@@ -1,11 +1,14 @@
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
-  CHANGE_SORT
+  CHANGE_SORT,
+  ADD_TO_BUFFER,
+  TAKE_FROM_BUFFER
 } from '../constants';
 
 export const INITIAL_STATE = {
   products: [],
+  buffer: [],
   isFetching: false,
   page: 0,
   pageSize: 20,
@@ -14,14 +17,15 @@ export const INITIAL_STATE = {
 
 export default function page(state = INITIAL_STATE, action = {}) {
   switch(action.type) {
-  case REQUEST_PRODUCTS:
+  case REQUEST_PRODUCTS:{
     return Object.assign({}, state, {
       page: state.page + 1,
       isFetching: true
     });
+  }
 
-  case RECEIVE_PRODUCTS:
-    const products = state.products.slice(0);
+  case RECEIVE_PRODUCTS: {
+    let products = state.products.slice(0);
 
     products.push(...action.products);
 
@@ -29,6 +33,7 @@ export default function page(state = INITIAL_STATE, action = {}) {
       isFetching: false,
       products: products
     });
+  }
 
   case CHANGE_SORT: {
     return Object.assign({}, state, {
@@ -36,6 +41,26 @@ export default function page(state = INITIAL_STATE, action = {}) {
       page: 0,
       products: []
     });
+  }
+
+  case ADD_TO_BUFFER: {
+    let buffer = state.buffer.slice(0);
+
+    buffer.push(...action.products);
+
+    return Object.assign({}, state,{
+      buffer: buffer
+    });
+  }
+
+  case TAKE_FROM_BUFFER: {
+    let buffer = state.buffer.slice(0);
+    let products = buffer.splice(0, state.pageSize);
+
+    return {
+      buffer,
+      products
+    };
   }
 
   default:
