@@ -6,26 +6,26 @@ class ProductsService {
   getProducts(options) {
     const url = this.getUrlFromOptions(options);
 
-    return this.$http.get(url,
-                     {
-                       transformResponse: (data) => {
-                         const products =  data.split('\n').map((row) => {
-                           const product = row.length ? JSON.parse(row) : null;
+    return this.$http.get(url, {
+      transformResponse: this.transformResponse
+    });
+  }
 
-                           if(!(product)) {
-                             return null;
-                           }
+  transformResponse(data) {
+    const products =  data.split('\n').map((row) => {
+      const product = row.length ? JSON.parse(row) : null;
 
-                           return  Object.assign({}, product, {
-                             price: (product.price / 100),
-                             date: moment(new Date(product.date))
-                           });
+      if(!(product)) {
+        return null;
+      }
 
-                         }).filter(product => !!product);
+      return  Object.assign({}, product, {
+        price: (Number(product.price) / 100)
+      });
 
-                         return products;
-                       }
-                     });
+    }).filter(product => !!product);
+
+    return products;
   }
 
   getUrlFromOptions(options) {

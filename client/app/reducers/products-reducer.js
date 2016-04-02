@@ -4,7 +4,7 @@ import {
   CHANGE_SORT
 } from '../constants';
 
-const initialState = {
+export const INITIAL_STATE = {
   products: [],
   isFetching: false,
   page: 0,
@@ -12,7 +12,7 @@ const initialState = {
   sort: 'id'
 };
 
-export default function page(state = initialState, action = {}) {
+export default function page(state = INITIAL_STATE, action = {}) {
   switch(action.type) {
   case REQUEST_PRODUCTS:
     return Object.assign({}, state, {
