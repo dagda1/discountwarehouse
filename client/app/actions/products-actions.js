@@ -51,20 +51,18 @@ export default function productsActions(productsService) {
 
   function fetchNewPageIfNeeded() {
     return (dispatch, getState) => {
-      const page = getState().page;
-
-      if(page.buffer.length) {
-        dispatch(fetchProducts(page, addToBuffer));
+      if(getState().page.buffer.length) {
+        dispatch(fetchProducts(getState().page, addToBuffer));
         return dispatch(takeFromBuffer());
       }
 
-      if(!shouldFetchProducts(page)) {
+      if(!shouldFetchProducts(getState().page)) {
         return null;
       }
 
-      const result = dispatch(fetchProducts(page, receiveProducts));
+      const result = dispatch(fetchProducts(getState().page, receiveProducts));
 
-      dispatch(fetchProducts(getState().page, addToBuffer));
+      result.then(dispatch(fetchProducts(getState().page, addToBuffer)));
 
       return result;
     };

@@ -49,8 +49,9 @@ export default function page(state = INITIAL_STATE, action = {}) {
 
     buffer.push(...action.products);
 
-    return Object.assign({}, state,{
-      buffer: buffer
+    return Object.assign({}, state, {
+      isFetching: false,
+      buffer
     });
   }
 
