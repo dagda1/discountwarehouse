@@ -2,3 +2,4 @@
   - [ ] Format and display date
   - [ ] Display adverts
   - [ ] End of list displayed
+  - [ ] Action test

@@ -62,6 +62,7 @@ export default function productsActions(productsService) {
 
       const result = dispatch(fetchProducts(getState().page, receiveProducts));
 
+      // preload products buffer with another request
       result.then(dispatch(fetchProducts(getState().page, addToBuffer)));
 
       return result;

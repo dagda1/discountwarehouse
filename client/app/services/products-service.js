@@ -1,3 +1,5 @@
+import { toReadableFormat } from '../utils/date';
+
 class ProductsService {
   constructor($http) {
     this.$http = $http;
@@ -20,7 +22,8 @@ class ProductsService {
       }
 
       return  Object.assign({}, product, {
-        price: (Number(product.price) / 100)
+        price: (Number(product.price) / 100),
+        date: toReadableFormat(new Date(product.date))
       });
 
     }).filter(product => !!product);
