@@ -29,5 +29,10 @@ describe('ProductsService', () => {
 
       expect(dateFields[0]).toEqual(dateToString(new Date("Thu Mar 31 2016 02:18:18 GMT+0000 (GMT)")));
     });
+
+    it('should tag items as products', () => {
+      expect(products[0].isProduct).toBeTruthy();
+      expect(products[1].isProduct).toBeTruthy();
+    });
   });
 });

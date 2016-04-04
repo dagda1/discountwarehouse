@@ -1,5 +1,6 @@
 import productsReducer from '../app/reducers/products-reducer.js';
 import { INITIAL_STATE } from '../app/reducers/products-reducer.js';
+import { range } from 'lodash';
 
 import {
   REQUEST_PRODUCTS,
@@ -83,5 +84,42 @@ describe('ProductsReducer', () => {
     expect(nextState.buffer.length).toBeFalsy('buffer has been taken from.');
 
     expect(nextState.products.length).toEqual(2, 'products have been added to');
+  });
+
+  it('should place advert item every 20 products', () => {
+    const initialSate = productsReducer(undefined, 'initial action');
+
+    const action = {
+      type: RECEIVE_PRODUCTS,
+      products: range(20)
+    };
+
+    const nextState = productsReducer(initialSate, action);
+
+    expect(nextState.products.length).toEqual(21, 'precon - we have 20 products and an advert');
+
+    const nextAction = {
+      type: RECEIVE_PRODUCTS,
+      products: range(20, 40)
+    };
+
+    const firstAdvert = nextState.products[19];
+
+    const nextStateWithAdvert = productsReducer(nextState, nextAction);
+
+    const secondAdvert = nextStateWithAdvert.products[39];
+
+    const lastAction = {
+      type: RECEIVE_PRODUCTS,
+      products: range(40, 60)
+    };
+
+    const lastState = productsReducer(nextStateWithAdvert, lastAction);
+
+    const lastAdvert = lastState.products[59];
+
+    [firstAdvert, secondAdvert, lastAdvert].forEach((advert) => {
+      expect(advert.isAdvert).toBeTruthy();
+    });
   });
 });

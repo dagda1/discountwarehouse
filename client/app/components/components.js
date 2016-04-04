@@ -5,6 +5,7 @@ import ProductsList from './products/products-list.js';
 import Product from './product/product.js';
 import Picker from './picker/picker.js';
 import InfiniteScroller from './infinite-scroll/infinite-scroll';
+import Advert from './advert/advert.js';
 
 const componentModule = angular.module('app.components', [
   Navbar.name,
@@ -12,7 +13,8 @@ const componentModule = angular.module('app.components', [
   ProductsList.name,
   Product.name,
   Picker.name,
-  InfiniteScroller.name
+  InfiniteScroller.name,
+  Advert.name
 ]);
 
 export default componentModule;

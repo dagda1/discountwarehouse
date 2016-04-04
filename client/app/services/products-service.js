@@ -23,7 +23,8 @@ class ProductsService {
 
       return  Object.assign({}, product, {
         price: (Number(product.price) / 100),
-        date: toReadableFormat(new Date(product.date))
+        date: toReadableFormat(new Date(product.date)),
+        isProduct: true
       });
 
     }).filter(product => !!product);

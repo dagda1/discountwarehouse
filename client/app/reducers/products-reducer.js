@@ -6,13 +6,16 @@ import {
   TAKE_FROM_BUFFER
 } from '../constants';
 
+import advertInserter from '../utils/advert-inserter';
+
 export const INITIAL_STATE = {
   products: [],
   buffer: [],
   isFetching: false,
   page: 0,
   pageSize: 20,
-  sort: 'id'
+  sort: 'id',
+  lastAdvertIndex: null
 };
 
 export default function page(state = INITIAL_STATE, action = {}) {
@@ -25,9 +28,11 @@ export default function page(state = INITIAL_STATE, action = {}) {
   }
 
   case RECEIVE_PRODUCTS: {
+    let advertsAndProducts  = advertInserter(state.products.slice(0), action.products);
+
     let products = state.products.slice(0);
 
-    products.push(...action.products);
+    products.push(...advertsAndProducts);
 
     return Object.assign({}, state, {
       isFetching: false,
@@ -59,7 +64,9 @@ export default function page(state = INITIAL_STATE, action = {}) {
     let buffer = state.buffer.slice(0);
     let products = state.products.slice(0);
 
-    products.push(...buffer.splice(0, state.pageSize));
+    let advertsAndProducts  = advertInserter(state.products.slice(0), buffer.splice(0, state.pageSize));
+
+    products.push(...advertsAndProducts);
 
     return Object.assign({}, state, {
       buffer,

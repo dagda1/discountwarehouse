@@ -1,5 +1,5 @@
 * Next actions
-  - [ ] Format and display date
-  - [ ] Display adverts
+  - [X] Format and display date
+  - [X] Display adverts
+  - [ ] no two adverts the same
   - [ ] End of list displayed
-  - [ ] Action test

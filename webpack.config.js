@@ -54,6 +54,9 @@ module.exports = {
     proxy: [{
       path: '/api/*',
       target: 'http://localhost:8000'
+    }, {
+      path: '/ad/*',
+      target: 'http://localhost:8000'
     }]
   }
 };
