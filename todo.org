@@ -2,4 +2,5 @@
   - [X] Format and display date
   - [X] Display adverts
   - [X] no two adverts the same
-  - [ ] End of list displayed
+  - [X] End of list displayed
+  - [X] Update README

@@ -86,7 +86,7 @@ describe('ProductsReducer', () => {
     expect(nextState.products.length).toEqual(2, 'products have been added to');
   });
 
-  it('should place advert item every 20 products', () => {
+  it('should place advert every 20 products', () => {
     const initialSate = productsReducer(undefined, 'initial action');
 
     const action = {

@@ -14,7 +14,8 @@ export const INITIAL_STATE = {
   isFetching: false,
   page: 0,
   pageSize: 20,
-  sort: 'id'
+  sort: 'id',
+  endOfCatalogue: false
 };
 
 export default function page(state = INITIAL_STATE, action = {}) {
@@ -35,7 +36,8 @@ export default function page(state = INITIAL_STATE, action = {}) {
 
     return Object.assign({}, state, {
       isFetching: false,
-      products: products
+      products: products,
+      endOfCatalogue: !products.length
     });
   }
 

@@ -7,9 +7,13 @@ export default function advertInserter(stateList, actionList) {
   const stateListLength = stateList.length;
   const actionListLength = actionList.length;
 
+  if(!actionListLength) {
+    return actionList;
+  }
+
   let startIndex;
 
-  if(stateListLength === 0) {
+  if(!stateListLength) {
     startIndex = -1;
   } else {
     const lastIndex = findLastIndex(stateList, i => i.isAdvert) + 1;

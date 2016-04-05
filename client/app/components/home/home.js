@@ -17,7 +17,8 @@ const controller = class HomeController {
       products,
       sort,
       page,
-      pageSize
+      pageSize,
+      endOfCatalogue
     } = state.page;
 
     return {
@@ -25,7 +26,8 @@ const controller = class HomeController {
       sort,
       page,
       pageSize,
-      products
+      products,
+      endOfCatalogue
     };
   }
 
