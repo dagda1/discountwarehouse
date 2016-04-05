@@ -1,7 +1,7 @@
 const INSERT_ADVERT_INDEX = 20;
 
 import { nextRandomNumber } from './next-random-number';
-import { findLastIndex, reduce } from 'lodash';
+import { findLastIndex, reduce, find } from 'lodash';
 
 export default function advertInserter(stateList, actionList) {
   const stateListLength = stateList.length;
@@ -35,14 +35,24 @@ export default function advertInserter(stateList, actionList) {
   const combined = actionList.slice(0);
 
   let i = 0,
-      insertIndex = startIndex;
+      insertIndex = startIndex,
+      lastAdvertIndex,
+      nextAdvertIndex;
+
+  const lastAdvert = find(stateList, (item) => item.isAdvert);
+
+  if(lastAdvert) {
+    lastAdvertIndex = lastAdvert.index;
+  }
 
   for(i; i < cycles; i ++) {
     insertIndex += INSERT_ADVERT_INDEX;
 
+    nextAdvertIndex = nextRandomNumber(lastAdvertIndex);
+
     const advert = {
       isAdvert: true,
-      index: nextRandomNumber()
+      index: nextAdvertIndex
     };
 
     combined.splice(insertIndex, 0, advert);

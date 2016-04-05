@@ -14,8 +14,7 @@ export const INITIAL_STATE = {
   isFetching: false,
   page: 0,
   pageSize: 20,
-  sort: 'id',
-  lastAdvertIndex: null
+  sort: 'id'
 };
 
 export default function page(state = INITIAL_STATE, action = {}) {
